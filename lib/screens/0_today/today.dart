@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:millie/screens/0_today/audiochatbook.dart';
-import 'package:millie/screens/0_today/now.dart';
-import 'package:millie/screens/0_today/story.dart';
+import 'package:millie/screens/0_today/tab_widdget/tab_audiochatbook.dart';
+import 'package:millie/screens/0_today/tab_widdget/tab_now.dart';
+import 'package:millie/screens/0_today/tab_widdget/tab_story.dart';
 
 class TodayScreen extends StatefulWidget {
   const TodayScreen({Key? key}) : super(key: key);
