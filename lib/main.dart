@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:millie/screens/0_today/today.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,19 +19,33 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  List<Widget> _widgetOptions = [
+    TodayScreen(),
+    Container(color: Colors.amber,),
+    Container(color: Colors.deepPurple,),
+    Container(color: Colors.yellow,),
+    Container(color: Colors.blueGrey,),
+  ];
+
+  void _onItemTapped(int index){
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Stack(
-          children: [
-            Container(color: Colors.orange,),
-            MyAppBar(),
-          ],
-        ),
+        body: Center(child: _widgetOptions[_selectedIndex],),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           items: [
@@ -55,72 +70,12 @@ class MyHomePage extends StatelessWidget {
               label: '관리',
             ),
           ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
         ),
       ),
     );
   }
 }
 
-class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  const MyAppBar({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // leading: Text('Millie',style: TextStyle(fontSize: 20),),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GestureDetector(
-              child: Text('Millie',style: TextStyle(fontSize: 25),),
-              onTap: () {
-                print("clicked");
-              },
-            ),
-          ),
-
-          GestureDetector(
-            onTap: () {},
-            child: Stack(
-              children: [
-                Icon(
-                  Icons.notifications_none,
-                  size: 40,
-                ),
-                Positioned(
-                  child: SizedBox(
-                    child: CircleAvatar(
-                      backgroundColor: Colors.orange,
-                      child: Text(
-                        'N',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    height: 20,
-                    width: 20,
-                  ),
-                  top: 3,
-                  right: 3,
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => throw UnimplementedError();
-}
