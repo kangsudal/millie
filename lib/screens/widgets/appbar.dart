@@ -16,34 +16,37 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
         },
       ),
       actions: [
-        GestureDetector(
-          onTap: () {},
-          child: Stack(
-            children: [
-              Icon(
-                Icons.notifications_none,
-                size: 40,
-              ),
-              Positioned(
-                child: SizedBox(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.orange,
-                    child: Text(
-                      'N',
-                      style: TextStyle(
-                        color: Colors.white,
+        Padding(
+          padding: const EdgeInsets.only(top: 5.0, right: 8),
+          child: GestureDetector(
+            onTap: () {},
+            child: Stack(
+              children: [
+                Icon(
+                  Icons.notifications_none,
+                  size: 40,
+                ),
+                Positioned(
+                  child: SizedBox(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.orange,
+                      child: Text(
+                        'N',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
+                    height: 20,
+                    width: 20,
                   ),
-                  height: 20,
-                  width: 20,
+                  top: 3,
+                  right: 3,
                 ),
-                top: 3,
-                right: 3,
-              ),
-            ],
+              ],
+            ),
           ),
-        )
+        ),
       ],
       elevation: 0,
       backgroundColor: Colors.transparent,

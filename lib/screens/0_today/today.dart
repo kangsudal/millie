@@ -12,7 +12,7 @@ class _TodayScreenState extends State<TodayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // extendBodyBehindAppBar: true,
-      appBar: MyAppBar2(),
+      appBar: TodayAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -34,8 +34,9 @@ class _TodayScreenState extends State<TodayScreen> {
     );
   }
 }
-class MyAppBar2 extends StatelessWidget with PreferredSizeWidget {
-  const MyAppBar2({
+
+class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
+  const TodayAppBar({
     Key? key,
   }) : super(key: key);
 
@@ -50,32 +51,35 @@ class MyAppBar2 extends StatelessWidget with PreferredSizeWidget {
         },
       ),
       actions: [
-        GestureDetector(
-          onTap: () {},
-          child: Stack(
-            children: [
-              Icon(
-                Icons.notifications_none,
-                size: 40,
-              ),
-              Positioned(
-                child: SizedBox(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.orange,
-                    child: Text(
-                      'N',
-                      style: TextStyle(
-                        color: Colors.white,
+        Padding(
+          padding: const EdgeInsets.only(top: 5.0, right: 8),
+          child: GestureDetector(
+            onTap: () {},
+            child: Stack(
+              children: [
+                Icon(
+                  Icons.notifications_none,
+                  size: 40,
+                ),
+                Positioned(
+                  child: SizedBox(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.orange,
+                      child: Text(
+                        'N',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
+                    height: 20,
+                    width: 20,
                   ),
-                  height: 20,
-                  width: 20,
+                  top: 3,
+                  right: 3,
                 ),
-                top: 3,
-                right: 3,
-              ),
-            ],
+              ],
+            ),
           ),
         )
       ],
