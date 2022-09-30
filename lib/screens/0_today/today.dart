@@ -10,29 +10,71 @@ class TodayScreen extends StatefulWidget {
 class _TodayScreenState extends State<TodayScreen> {
   @override
   Widget build(BuildContext context) {
+    int _selectedIndex = 0;
+    List<Widget> _widgetOptions = [
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              color: Colors.pink,
+            ),
+            Container(
+              height: 300,
+              color: Colors.yellow,
+            ),
+            Container(
+              height: 300,
+              color: Colors.pink,
+            ),
+          ],
+        ),
+      ),
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              color: Colors.yellow,
+            ),
+            Container(
+              height: 300,
+              color: Colors.green,
+            ),
+            Container(
+              height: 300,
+              color: Colors.yellow,
+            ),
+          ],
+        ),
+      ),
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              color: Colors.purple,
+            ),
+            Container(
+              height: 300,
+              color: Colors.pink,
+            ),
+            Container(
+              height: 300,
+              color: Colors.black,
+            ),
+          ],
+        ),
+      ),
+    ];
     return DefaultTabController(
       length: 3,
       initialIndex: 0,
       child: Scaffold(
         // extendBodyBehindAppBar: true,
         appBar: TodayAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 300,
-                color: Colors.pink,
-              ),
-              Container(
-                height: 300,
-                color: Colors.yellow,
-              ),
-              Container(
-                height: 300,
-                color: Colors.pink,
-              ),
-            ],
-          ),
+        body: TabBarView(
+          children: _widgetOptions,
         ),
       ),
     );
@@ -71,10 +113,7 @@ class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
                       backgroundColor: Colors.orange,
                       child: Text(
                         'N',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 10
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 10),
                       ),
                     ),
                     height: 15,
@@ -104,8 +143,12 @@ class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
         ],
         indicatorColor: Colors.black,
         indicatorWeight: 4,
-        labelStyle: TextStyle(fontWeight: FontWeight.w900,),
-        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal,),
+        labelStyle: TextStyle(
+          fontWeight: FontWeight.w900,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.normal,
+        ),
       ),
     );
   }
