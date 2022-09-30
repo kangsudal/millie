@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:millie/screens/0_today/audiochatbook.dart';
+import 'package:millie/screens/0_today/now.dart';
+import 'package:millie/screens/0_today/story.dart';
 
 class TodayScreen extends StatefulWidget {
   const TodayScreen({Key? key}) : super(key: key);
@@ -12,79 +15,10 @@ class TodayScreen extends StatefulWidget {
 class _TodayScreenState extends State<TodayScreen> {
   @override
   Widget build(BuildContext context) {
-    int _selectedIndex = 0;
     List<Widget> _widgetOptions = [
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            CarouselSlider(
-              options: CarouselOptions(height: 300.0),
-              items: [1,2,3,4,5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                            color: Colors.amber
-                        ),
-                        child: Text('text $i', style: TextStyle(fontSize: 16.0),)
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-            Container(
-              height: 300,
-              color: Colors.pink,
-            ),
-            Container(
-              height: 300,
-              color: Colors.yellow,
-            ),
-            Container(
-              height: 300,
-              color: Colors.pink,
-            ),
-          ],
-        ),
-      ),
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 300,
-              color: Colors.yellow,
-            ),
-            Container(
-              height: 300,
-              color: Colors.green,
-            ),
-            Container(
-              height: 300,
-              color: Colors.yellow,
-            ),
-          ],
-        ),
-      ),
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 300,
-              color: Colors.purple,
-            ),
-            Container(
-              height: 300,
-              color: Colors.pink,
-            ),
-            Container(
-              height: 300,
-              color: Colors.black,
-            ),
-          ],
-        ),
-      ),
+      NowTabBarView(),
+      AudioBookTabBarView(),
+      StoryTabBarView(),
     ];
     return DefaultTabController(
       length: 3,
