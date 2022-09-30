@@ -24,7 +24,7 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
               children: [
                 Icon(
                   Icons.notifications_none,
-                  size: 40,
+                  size: 35,
                 ),
                 Positioned(
                   child: SizedBox(
@@ -33,12 +33,13 @@ class MyAppBar extends StatelessWidget with PreferredSizeWidget {
                       child: Text(
                         'N',
                         style: TextStyle(
-                          color: Colors.white,
+                            color: Colors.white,
+                            fontSize: 10
                         ),
                       ),
                     ),
-                    height: 20,
-                    width: 20,
+                    height: 15,
+                    width: 15,
                   ),
                   top: 3,
                   right: 3,

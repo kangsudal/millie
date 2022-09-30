@@ -10,25 +10,29 @@ class TodayScreen extends StatefulWidget {
 class _TodayScreenState extends State<TodayScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // extendBodyBehindAppBar: true,
-      appBar: TodayAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 300,
-              color: Colors.pink,
-            ),
-            Container(
-              height: 300,
-              color: Colors.yellow,
-            ),
-            Container(
-              height: 300,
-              color: Colors.pink,
-            ),
-          ],
+    return DefaultTabController(
+      length: 3,
+      initialIndex: 0,
+      child: Scaffold(
+        // extendBodyBehindAppBar: true,
+        appBar: TodayAppBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 300,
+                color: Colors.pink,
+              ),
+              Container(
+                height: 300,
+                color: Colors.yellow,
+              ),
+              Container(
+                height: 300,
+                color: Colors.pink,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -59,7 +63,7 @@ class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
               children: [
                 Icon(
                   Icons.notifications_none,
-                  size: 40,
+                  size: 35,
                 ),
                 Positioned(
                   child: SizedBox(
@@ -69,11 +73,12 @@ class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
                         'N',
                         style: TextStyle(
                           color: Colors.white,
+                          fontSize: 10
                         ),
                       ),
                     ),
-                    height: 20,
-                    width: 20,
+                    height: 15,
+                    width: 15,
                   ),
                   top: 3,
                   right: 3,
@@ -85,10 +90,26 @@ class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
       ],
       elevation: 0,
       backgroundColor: Colors.transparent,
-      // bottom: TabBar(tabs: [Tab(icon: Icon(Icons.cloud_outlined),),Tab(icon: Icon(Icons.cloud_outlined),),Tab(icon: Icon(Icons.cloud_outlined),),]),
+      bottom: const TabBar(
+        tabs: <Widget>[
+          Tab(
+            child: Text('NOW'),
+          ),
+          Tab(
+            child: Text('오디오북·챗북'),
+          ),
+          Tab(
+            child: Text('스토리'),
+          ),
+        ],
+        indicatorColor: Colors.black,
+        indicatorWeight: 4,
+        labelStyle: TextStyle(fontWeight: FontWeight.w900,),
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal,),
+      ),
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight * 2);
 }
