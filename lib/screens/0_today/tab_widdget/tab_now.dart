@@ -57,8 +57,50 @@ class NewWidget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
       height: 300,
-      color: Colors.pink,
+      color: Colors.transparent,
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '꾸꾸까까님,',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black38,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '독서가 습관이 되는 시작, 나만의 독서 목표를 세워보세요.',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black38,
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.navigate_next,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -152,20 +194,24 @@ class _NewWidgetState extends State<NewWidget> {
                                     left: 8,
                                     bottom: 30,
                                   ),
-                                  // margin: EdgeInsets.all(8),
-                                  width: 60,
+                                  padding: EdgeInsets.only(left: 8),
+                                  width: 80,
                                   height: 40,
                                   decoration: BoxDecoration(
                                     border: Border.all(),
                                     borderRadius: BorderRadius.circular(18),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      '$currentPage/${dataList.length}>',
-                                      style: TextStyle(
-                                        fontSize: 20,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '$currentPage/${dataList.length}',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ),
+                                      Icon(Icons.navigate_next),
+                                    ],
                                   ),
                                 ),
                                 SizedBox(
