@@ -63,11 +63,17 @@ class NewWidget2 extends StatelessWidget {
   }
 }
 
-class NewWidget extends StatelessWidget {
+class NewWidget extends StatefulWidget {
   const NewWidget({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<NewWidget> createState() => _NewWidgetState();
+}
+
+class _NewWidgetState extends State<NewWidget> {
+  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
     final dataList = [
@@ -80,7 +86,7 @@ class NewWidget extends StatelessWidget {
       {
         'title': '둘 중 어느영상이 AI작품을까요?',
         'subTitle': 'AI가 영상을 만들 수 있다고?',
-        'img': 'images/robot.png',
+        'img': 'images/bear.png',
         // 'https://images.unsplash.com/photo-1539606328118-80c679838702?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80',
       },
       {
@@ -90,64 +96,97 @@ class NewWidget extends StatelessWidget {
         // 'https://images.unsplash.com/photo-1528825871115-3581a5387919?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80',
       }
     ];
-    return CarouselSlider.builder(
-      options: CarouselOptions(
-        viewportFraction: 1,
-        height: 300.0,
-        autoPlay: true,
-      ),
-      itemCount: 3,
-      itemBuilder: (BuildContext context, int index, int realIndex) {
-        final String title = dataList[index]['title'] ?? 'title';
-        final subTitle = dataList[index]['subTitle'] ?? 'subTitle';
-        final img = dataList[index]['img'] ?? 'images/bear.png';
+    return Stack(
+      children: [
+        Container(
+          color: Colors.primaries[currentPage].withOpacity(0.5),
+          height: 230,
+        ),
+        CarouselSlider.builder(
+          options: CarouselOptions(
+              viewportFraction: 1,
+              height: 300.0,
+              autoPlay: true,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentPage = index;
+                });
+              }),
+          itemCount: 3,
+          itemBuilder: (BuildContext context, int index, int realIndex) {
+            final String title = dataList[index]['title'] ?? 'title';
+            final subTitle = dataList[index]['subTitle'] ?? 'subTitle';
+            final img = dataList[index]['img'] ?? 'images/bear.png';
             // 'https://images.unsplash.com/photo-1497354861845-d381fb7c91a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
 
-        return Stack(
-          children: [
-            Column(
+            return Stack(
               children: [
-                Container(
-                  height: 250,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.primaries[index].withOpacity(0.5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 30),
+                Column(
+                  children: [
+                    Container(
+                      height: 300,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 30),
+                            ),
+                            Text(
+                              subTitle,
+                              style: TextStyle(
+                                  color: Colors.black38, fontSize: 20),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: SizedBox(
+                                child: Image.asset(
+                                  img,
+                                  fit: BoxFit.contain,
+                                ),
+                                width: 150,
+                                height: 180,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          subTitle,
-                          style: TextStyle(color: Colors.black38, fontSize: 20),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                Container(
-                  color: Colors.white,
-                ), //white empty area
               ],
+            );
+          },
+        ),
+        Positioned(
+          left: 30,
+          bottom: 80,
+          child: Container(
+            margin: EdgeInsets.all(8),
+            width: 60,
+            height: 40,
+            decoration: BoxDecoration(
+              border: Border.all(),
+              borderRadius: BorderRadius.circular(18),
             ),
-            Positioned(
-              child: SizedBox(
-                child: Image.asset(img,fit: BoxFit.contain,),
-                width: 150,
-                height: 180,
+            child: Center(
+              child: Text(
+                '$currentPage/${dataList.length}>',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
-              bottom: 0,
-              right: 20,
             ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     );
   }
 }
