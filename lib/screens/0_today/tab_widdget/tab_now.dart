@@ -144,16 +144,39 @@ class _NewWidgetState extends State<NewWidget> {
                               style: TextStyle(
                                   color: Colors.black38, fontSize: 20),
                             ),
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: SizedBox(
-                                child: Image.asset(
-                                  img,
-                                  fit: BoxFit.contain,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    left: 8,
+                                    bottom: 30,
+                                  ),
+                                  // margin: EdgeInsets.all(8),
+                                  width: 60,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '$currentPage/${dataList.length}>',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                width: 150,
-                                height: 180,
-                              ),
+                                SizedBox(
+                                  child: Image.asset(
+                                    img,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  width: 150,
+                                  height: 180,
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -165,7 +188,7 @@ class _NewWidgetState extends State<NewWidget> {
             );
           },
         ),
-        Positioned(
+/*        Positioned(
           left: 30,
           bottom: 80,
           child: Container(
@@ -185,7 +208,7 @@ class _NewWidgetState extends State<NewWidget> {
               ),
             ),
           ),
-        ),
+        ),*/
       ],
     );
   }
