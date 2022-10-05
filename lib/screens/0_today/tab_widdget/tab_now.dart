@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+const double leftPadding = 20;
 class NowTabBarView extends StatelessWidget {
   const NowTabBarView({
     Key? key,
@@ -44,125 +45,159 @@ class NewWidget3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        //title
-        Container(
-          height: 70,
-          // color: Colors.brown,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '당신을 위한 추천',
-                style: TextStyle(
-                  color: Colors.black38,
+    return Padding(
+      padding: EdgeInsets.only(left: leftPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //title
+          Container(
+            height: 70,
+            // color: Colors.brown,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '당신을 위한 추천',
+                  style: TextStyle(
+                    color: Colors.black38,
+                  ),
                 ),
-              ),
-              Text.rich(TextSpan(
-                text: '요즘',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: ' 20대 여성',
-                    style: TextStyle(
-                      color: Colors.deepPurple,
+                Text.rich(TextSpan(
+                  text: '요즘',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: ' 20대 여성',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                      ),
                     ),
-                  ),
-                  TextSpan(
-                    text: '이 많이 보는 ',
-                    style: TextStyle(),
-                  ),
-                  TextSpan(
-                    text: '경제경영',
-                    style: TextStyle(
-                      color: Colors.deepPurple,
+                    TextSpan(
+                      text: '이 많이 보는 ',
+                      style: TextStyle(),
                     ),
-                  ),
-                ],
-              )),
-            ],
+                    TextSpan(
+                      text: '경제경영',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                  ],
+                )),
+              ],
+            ),
           ),
-        ),
-        //contents
-        Container(
-          height: 300,
-          color: Colors.yellow,
-          child: ListView.builder(
-            itemCount: 6,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Container(
-                width: 200,
-                margin: EdgeInsets.only(top: 8, bottom: 4, right: 16),
-                decoration: BoxDecoration(
-                  color: Colors.pink,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            top: 0,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: ImageFiltered(
-                                imageFilter: ImageFilter.blur(sigmaY: 20,sigmaX: 20,),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          'https://images.unsplash.com/photo-1518449139872-3004c5a597f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                      fit: BoxFit.cover,
+          //contents
+          Container(
+            height: 300,
+            // color: Colors.yellow,
+            child: ListView.builder(
+              itemCount: 6,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 250,
+                  margin: EdgeInsets.only(top: 8, bottom: 4, right: 16),
+                  decoration: BoxDecoration(
+                    // color: Colors.pink,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              top: 0,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: ImageFiltered(
+                                  imageFilter: ImageFilter.blur(
+                                    sigmaY: 20,
+                                    sigmaX: 20,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            'https://images.unsplash.com/photo-1518449139872-3004c5a597f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            left: 25,
-                            right: 25,
-                            bottom: 0,
-                            top: 20,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(),
-                                borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                      'https://images.unsplash.com/photo-1630427144557-245b51ee70be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80',
-                                    ),
-                                    fit: BoxFit.cover),
+                            Positioned(
+                              left: 25,
+                              right: 25,
+                              bottom: 0,
+                              top: 20,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(),
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(4)),
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                        'https://images.unsplash.com/photo-1630427144557-245b51ee70be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80',
+                                      ),
+                                      fit: BoxFit.cover),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                      Text(
+                        '숫자 감각의 힘',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text('사이토 고타즈 저/양필성 역',style: TextStyle(color: Colors.black38),),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          Align(
+              alignment: Alignment.center,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 40,top: 20),
+                // padding: EdgeInsets.symmetric(vertical: 8,horizontal: 80),
+                height: 40,
+                width: 300,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black38),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.refresh,
+                      color: Colors.black38,
                     ),
                     Text(
-                      '숫자 감각의 힘',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      '더 많이 발견하기',
+                      style: TextStyle(color: Colors.black38),
                     ),
-                    Text('사이토 고타즈 저/양필성 역'),
                   ],
                 ),
-              );
-            },
-          ),
-        ),
-      ],
+              )),
+        ],
+      ),
     );
   }
 }
@@ -176,9 +211,9 @@ class NewWidget2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: 10,
+        horizontal: 20,
       ),
-      height: 300,
+      height: 180,
       color: Colors.transparent,
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.start,
@@ -290,7 +325,7 @@ class _NewWidgetState extends State<NewWidget> {
                         color: Colors.transparent,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: leftPadding),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
