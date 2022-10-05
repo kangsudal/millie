@@ -32,8 +32,16 @@ class NewWidget4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 800,
       color: Colors.pink,
+      child: Column(
+        children: [
+          Container(),
+          //tabbar로 구현해보기
+          Container(),
+          Container(),
+        ],
+      ),
     );
   }
 }
