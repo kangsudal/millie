@@ -45,6 +45,7 @@ class NewWidget3 extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        //title
         Container(
           height: 70,
           // color: Colors.brown,
@@ -81,6 +82,7 @@ class NewWidget3 extends StatelessWidget {
             ],
           ),
         ),
+        //contents
         Container(
           height: 300,
           color: Colors.yellow,
@@ -94,6 +96,16 @@ class NewWidget3 extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.pink,
                   borderRadius: BorderRadius.circular(4),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: Placeholder()),
+
+                        Text('숫자 감각의 힘',style: TextStyle(fontWeight: FontWeight.bold),),
+                        Text('사이토 고타즈 저/양필성 역'),
+
+                  ],
                 ),
               );
             },
