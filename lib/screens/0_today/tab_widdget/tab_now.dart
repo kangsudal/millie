@@ -45,6 +45,20 @@ class NewWidget3 extends StatelessWidget {
     return Container(
       height: 300,
       color: Colors.yellow,
+      child: ListView.builder(
+        itemCount: 6,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            width: 200,
+            margin: EdgeInsets.only(top: 8, bottom: 4, right: 16),
+            decoration: BoxDecoration(
+              color: Colors.pink,
+              borderRadius: BorderRadius.circular(4),
+            ),
+          );
+        },
+      ),
     );
   }
 }
