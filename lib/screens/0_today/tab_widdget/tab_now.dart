@@ -52,7 +52,12 @@ class NewWidget3 extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('당신을 위한 추천',style: TextStyle(color: Colors.black38,),),
+              Text(
+                '당신을 위한 추천',
+                style: TextStyle(
+                  color: Colors.black38,
+                ),
+              ),
               Text.rich(TextSpan(
                 text: '요즘',
                 style: TextStyle(
@@ -95,16 +100,55 @@ class NewWidget3 extends StatelessWidget {
                 margin: EdgeInsets.only(top: 8, bottom: 4, right: 16),
                 decoration: BoxDecoration(
                   color: Colors.pink,
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: Placeholder()),
-
-                        Text('숫자 감각의 힘',style: TextStyle(fontWeight: FontWeight.bold),),
-                        Text('사이토 고타즈 저/양필성 역'),
-
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            top: 0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      'https://images.unsplash.com/photo-1518449139872-3004c5a597f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 25,
+                            right: 25,
+                            bottom: 0,
+                            top: 20,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                      'https://images.unsplash.com/photo-1630427144557-245b51ee70be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80',
+                                    ),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      '숫자 감각의 힘',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text('사이토 고타즈 저/양필성 역'),
                   ],
                 ),
               );
