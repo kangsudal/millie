@@ -166,16 +166,17 @@ class _NewWidget3State extends State<NewWidget3> {
                                 child: Stack(
                                   children: [
                                     Positioned(
-                                      left: 0,
-                                      right: 0,
-                                      bottom: 0,
-                                      top: 0,
+                                      left: -20,
+                                      right: -20,
+                                      bottom: -20,
+                                      top: -20,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(15),
                                         child: ImageFiltered(
                                           imageFilter: ImageFilter.blur(
-                                            sigmaY: 300,
-                                            sigmaX: 300,
+                                            tileMode: TileMode.decal,
+                                            sigmaY: 40,
+                                            sigmaX: 40,
                                           ),
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -234,7 +235,7 @@ class _NewWidget3State extends State<NewWidget3> {
                     child: Text('${snapshot.error}'),
                   );
                 }
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }),
           Align(
               alignment: Alignment.center,
