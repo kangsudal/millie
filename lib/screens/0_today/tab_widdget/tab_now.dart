@@ -61,9 +61,12 @@ class NewWidget3 extends StatefulWidget {
 
 class _NewWidget3State extends State<NewWidget3> {
   late Future<List<Book>> futureBooks;
+  String keyword = 'economy';
+  int startIndex = 0;
   Future<List<Book>> fetchBooks() async {
+    print('hi');
     Uri url = Uri.parse(
-        'https://www.googleapis.com/books/v1/volumes?q=economy'); //&maxResults=1
+        'https://www.googleapis.com/books/v1/volumes?q=$keyword&startIndex=$startIndex'); //&maxResults=1
     final response = await http.get(url);
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
@@ -174,7 +177,9 @@ class _NewWidget3State extends State<NewWidget3> {
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: NetworkImage(
-                                                  snapshot.data![index].thumbnail,),
+                                                  snapshot
+                                                      .data![index].thumbnail,
+                                                ),
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -208,7 +213,7 @@ class _NewWidget3State extends State<NewWidget3> {
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                snapshot.data![index].authors![0],
+                                snapshot.data![index].authors[0],
                                 style: TextStyle(
                                   color: Colors.black38,
                                   overflow: TextOverflow.ellipsis,
@@ -229,29 +234,38 @@ class _NewWidget3State extends State<NewWidget3> {
               }),
           Align(
               alignment: Alignment.center,
-              child: Container(
-                margin: EdgeInsets.only(bottom: 40, top: 20),
-                // padding: EdgeInsets.symmetric(vertical: 8,horizontal: 80),
-                height: 40,
-                width: 300,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black38),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+              child: GestureDetector(
+                onTap: () {
+                  print(startIndex);
+                  setState(() {
+                    startIndex++;
+                    futureBooks = fetchBooks();
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 40, top: 20),
+                  // padding: EdgeInsets.symmetric(vertical: 8,horizontal: 80),
+                  height: 40,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black38),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.refresh,
-                      color: Colors.black38,
-                    ),
-                    Text(
-                      '더 많이 발견하기',
-                      style: TextStyle(color: Colors.black38),
-                    ),
-                  ],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.refresh,
+                        color: Colors.black38,
+                      ),
+                      Text(
+                        '더 많이 발견하기',
+                        style: TextStyle(color: Colors.black38),
+                      ),
+                    ],
+                  ),
                 ),
               )),
         ],
