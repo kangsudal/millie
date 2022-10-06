@@ -194,7 +194,7 @@ class _NewWidget3State extends State<NewWidget3> {
                                               top: Radius.circular(4)),
                                           image: DecorationImage(
                                               image: NetworkImage(
-                                                'https://images.unsplash.com/photo-1630427144557-245b51ee70be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80',
+                                                snapshot.data![index].thumbnail,
                                               ),
                                               fit: BoxFit.cover),
                                         ),
