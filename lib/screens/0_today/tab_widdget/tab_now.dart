@@ -146,7 +146,7 @@ class _NewWidget3State extends State<NewWidget3> {
                       itemBuilder: (context, index) {
                         return Container(
                           width: 250,
-                          margin: EdgeInsets.only(top: 8, bottom: 4, right: 16),
+                          margin: EdgeInsets.only(top: 8, right: 16),
                           decoration: BoxDecoration(
                             // color: Colors.pink,
                             borderRadius: BorderRadius.circular(15),
@@ -154,7 +154,8 @@ class _NewWidget3State extends State<NewWidget3> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
+                              SizedBox(
+                                height: 230,
                                 child: Stack(
                                   children: [
                                     Positioned(
@@ -208,7 +209,10 @@ class _NewWidget3State extends State<NewWidget3> {
                               ),
                               Text(
                                 '사이토 고타즈 저/양필성 역',
-                                style: TextStyle(color: Colors.black38),
+                                style: TextStyle(
+                                  color: Colors.black38,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),

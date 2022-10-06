@@ -12,8 +12,8 @@ class Book {
   factory Book.fromJson(Map json) {
     return Book(
       id: json['id'],
-      title: json['title'],
-      authors: json['author'],
+      title: json['volumeInfo']['title'],
+      authors: json['volumeInfo']['author'],
     );
   }
 }
