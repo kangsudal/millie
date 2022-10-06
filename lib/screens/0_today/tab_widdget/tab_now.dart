@@ -63,7 +63,7 @@ class _NewWidget3State extends State<NewWidget3> {
   late Future<List<Book>> futureBooks;
   Future<List<Book>> fetchBooks() async {
     Uri url = Uri.parse(
-        'https://www.googleapis.com/books/v1/volumes?q=경제 경영'); //&maxResults=1
+        'https://www.googleapis.com/books/v1/volumes?q=economy'); //&maxResults=1
     final response = await http.get(url);
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
@@ -167,14 +167,14 @@ class _NewWidget3State extends State<NewWidget3> {
                                         borderRadius: BorderRadius.circular(15),
                                         child: ImageFiltered(
                                           imageFilter: ImageFilter.blur(
-                                            sigmaY: 20,
-                                            sigmaX: 20,
+                                            sigmaY: 300,
+                                            sigmaX: 300,
                                           ),
                                           child: Container(
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: NetworkImage(
-                                                    'https://images.unsplash.com/photo-1518449139872-3004c5a597f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                  snapshot.data![index].thumbnail,),
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -183,13 +183,13 @@ class _NewWidget3State extends State<NewWidget3> {
                                       ),
                                     ),
                                     Positioned(
-                                      left: 25,
-                                      right: 25,
+                                      left: 50,
+                                      right: 50,
                                       bottom: 0,
                                       top: 20,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          border: Border.all(),
+                                          // border: Border.all(),
                                           borderRadius: BorderRadius.vertical(
                                               top: Radius.circular(4)),
                                           image: DecorationImage(
