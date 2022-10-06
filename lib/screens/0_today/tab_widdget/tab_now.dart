@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:millie/models/book.dart';
 
 const double leftPadding = 20;
+
 class NowTabBarView extends StatelessWidget {
   const NowTabBarView({
     Key? key,
@@ -46,10 +50,38 @@ class NewWidget4 extends StatelessWidget {
   }
 }
 
-class NewWidget3 extends StatelessWidget {
+class NewWidget3 extends StatefulWidget {
   const NewWidget3({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<NewWidget3> createState() => _NewWidget3State();
+}
+
+class _NewWidget3State extends State<NewWidget3> {
+  late Future<List<Book>> futureBooks;
+  Future<List<Book>> fetchBooks() async {
+    Uri url = Uri.parse(
+        'https://www.googleapis.com/books/v1/volumes?q=경제 경영'); //&maxResults=1
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      List<dynamic> items = json['items'];
+      List<Book> books = (items.map((item) {
+        return Book.fromJson(item);
+      })).toList();
+      return books;
+    } else {
+      throw Exception('Failed to load Books');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    futureBooks = fetchBooks();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,86 +133,100 @@ class NewWidget3 extends StatelessWidget {
             ),
           ),
           //contents
-          Container(
-            height: 300,
-            // color: Colors.yellow,
-            child: ListView.builder(
-              itemCount: 6,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Container(
-                  width: 250,
-                  margin: EdgeInsets.only(top: 8, bottom: 4, right: 16),
-                  decoration: BoxDecoration(
-                    // color: Colors.pink,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              top: 0,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: ImageFiltered(
-                                  imageFilter: ImageFilter.blur(
-                                    sigmaY: 20,
-                                    sigmaX: 20,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                            'https://images.unsplash.com/photo-1518449139872-3004c5a597f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
-                                        fit: BoxFit.cover,
+          FutureBuilder(
+              future: futureBooks,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Container(
+                    height: 300,
+                    // color: Colors.yellow,
+                    child: ListView.builder(
+                      itemCount: 6,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: 250,
+                          margin: EdgeInsets.only(top: 8, bottom: 4, right: 16),
+                          decoration: BoxDecoration(
+                            // color: Colors.pink,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0,
+                                      right: 0,
+                                      bottom: 0,
+                                      top: 0,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: ImageFiltered(
+                                          imageFilter: ImageFilter.blur(
+                                            sigmaY: 20,
+                                            sigmaX: 20,
+                                          ),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    'https://images.unsplash.com/photo-1518449139872-3004c5a597f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80'),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              left: 25,
-                              right: 25,
-                              bottom: 0,
-                              top: 20,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(),
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(4)),
-                                  image: DecorationImage(
-                                      image: NetworkImage(
-                                        'https://images.unsplash.com/photo-1630427144557-245b51ee70be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80',
+                                    Positioned(
+                                      left: 25,
+                                      right: 25,
+                                      bottom: 0,
+                                      top: 20,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(),
+                                          borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(4)),
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                'https://images.unsplash.com/photo-1630427144557-245b51ee70be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80',
+                                              ),
+                                              fit: BoxFit.cover),
+                                        ),
                                       ),
-                                      fit: BoxFit.cover),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        '숫자 감각의 힘',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text('사이토 고타즈 저/양필성 역',style: TextStyle(color: Colors.black38),),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+                              Text(
+                                '숫자 감각의 힘',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                '사이토 고타즈 저/양필성 역',
+                                style: TextStyle(color: Colors.black38),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('${snapshot.error}'),
+                  );
+                }
+                return CircularProgressIndicator();
+              }),
           Align(
               alignment: Alignment.center,
               child: Container(
-                margin: EdgeInsets.only(bottom: 40,top: 20),
+                margin: EdgeInsets.only(bottom: 40, top: 20),
                 // padding: EdgeInsets.symmetric(vertical: 8,horizontal: 80),
                 height: 40,
                 width: 300,
@@ -333,7 +379,8 @@ class _NewWidgetState extends State<NewWidget> {
                         color: Colors.transparent,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: leftPadding),
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: leftPadding),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
