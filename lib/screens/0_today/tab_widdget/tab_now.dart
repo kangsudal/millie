@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -61,15 +62,18 @@ class NewWidget3 extends StatefulWidget {
 
 class _NewWidget3State extends State<NewWidget3> {
   late Future<List<Book>> futureBooks;
-  String keyword = 'economy';
+  String keyword = '20대 경제';
   int startIndex = 0;
+  // int bookLength = 0; //result total books / totalItems 총 검색조회수가 아닌거같음.
+  int itemCount = 6; //displayed book
+
   Future<List<Book>> fetchBooks() async {
-    print('hi');
     Uri url = Uri.parse(
         'https://www.googleapis.com/books/v1/volumes?q=$keyword&startIndex=$startIndex'); //&maxResults=1
     final response = await http.get(url);
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
+      // bookLength = json['totalItems'];
       List<dynamic> items = json['items'];
       List<Book> books = (items.map((item) {
         return Book.fromJson(item);
@@ -144,7 +148,7 @@ class _NewWidget3State extends State<NewWidget3> {
                     height: 300,
                     // color: Colors.yellow,
                     child: ListView.builder(
-                      itemCount: 6,
+                      itemCount: itemCount,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Container(
@@ -236,9 +240,9 @@ class _NewWidget3State extends State<NewWidget3> {
               alignment: Alignment.center,
               child: GestureDetector(
                 onTap: () {
-                  print(startIndex);
                   setState(() {
-                    startIndex++;
+                    var rng = Random();
+                    startIndex = rng.nextInt(300); //총 검색량 수가 맞지않는것같아 임의로 300까지 랜덤값으로 startIndex를 줌
                     futureBooks = fetchBooks();
                   });
                 },
