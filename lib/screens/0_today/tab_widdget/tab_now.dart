@@ -133,7 +133,7 @@ class _NewWidget3State extends State<NewWidget3> {
             ),
           ),
           //contents
-          FutureBuilder(
+          FutureBuilder<List<Book>>(
               future: futureBooks,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -203,7 +203,7 @@ class _NewWidget3State extends State<NewWidget3> {
                                 ),
                               ),
                               Text(
-                                '숫자 감각의 힘',
+                                '${snapshot.data![index].title}',
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               Text(
