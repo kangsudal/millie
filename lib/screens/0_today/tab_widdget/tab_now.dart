@@ -208,7 +208,7 @@ class _NewWidget3State extends State<NewWidget3> {
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                '사이토 고타즈 저/양필성 역',
+                                snapshot.data![index].authors![0],
                                 style: TextStyle(
                                   color: Colors.black38,
                                   overflow: TextOverflow.ellipsis,
