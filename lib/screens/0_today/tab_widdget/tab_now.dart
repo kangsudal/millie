@@ -165,7 +165,8 @@ class _NewWidget3State extends State<NewWidget3> {
                                 height: 230,
                                 child: Stack(
                                   children: [
-                                    BluredBackgroundImgWidget(snapshot:snapshot,index:index),
+                                    BluredBackgroundImgWidget(
+                                        snapshot: snapshot, index: index),
                                     BookCoverWidget(
                                       snapshot: snapshot,
                                       index: index,
@@ -244,7 +245,9 @@ class BluredBackgroundImgWidget extends StatelessWidget {
   final AsyncSnapshot<List<Book>> snapshot;
   final int index;
   const BluredBackgroundImgWidget({
-    Key? key, required this.snapshot,required this.index,
+    Key? key,
+    required this.snapshot,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -265,10 +268,11 @@ class BluredBackgroundImgWidget extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(
-                  snapshot
-                      .data![index].thumbnail,
-                ),
+                image: snapshot.data![index].thumbnail == ''
+                    ? AssetImage('images/emptybookcover.png') as ImageProvider
+                    : NetworkImage(
+                        snapshot.data![index].thumbnail,
+                      ),
                 fit: BoxFit.cover,
               ),
             ),
@@ -300,10 +304,13 @@ class BookCoverWidget extends StatelessWidget {
           // border: Border.all(),
           borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
           image: DecorationImage(
-              image: NetworkImage(
-                snapshot.data![index].thumbnail,
-              ),
-              fit: BoxFit.cover),
+            image: snapshot.data![index].thumbnail == ''
+                ? AssetImage('images/emptybookcover.png') as ImageProvider
+                : NetworkImage(
+                    snapshot.data![index].thumbnail,
+                  ),
+            fit: BoxFit.contain,
+          ),
         ),
       ),
     );
@@ -467,7 +474,7 @@ class _NewWidgetState extends State<NewWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        '$currentPage/${dataList.length}',
+                                        '${currentPage+1}/${dataList.length}',
                                         style: TextStyle(
                                           fontSize: 20,
                                         ),
