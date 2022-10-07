@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:millie/screens/0_today/today.dart';
+import 'package:millie/screens/4_management/management.dart';
 import 'package:millie/screens/5_notification/notification.dart';
 
 void main() {
@@ -45,9 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Container(
       color: Colors.yellow,
     ),
-    Container(
-      color: Colors.blueGrey,
-    ),
+    ManagementScreen(),
   ];
 
   void _onItemTapped(int index) {
