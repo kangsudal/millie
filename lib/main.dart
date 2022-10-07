@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:millie/screens/0_today/today.dart';
+import 'package:millie/screens/5_notification/notification.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: const MyHomePage(),
+      // home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(),
+        '/notification': (context) => NotificationPage(),
+      },
     );
   }
 }
@@ -30,22 +36,33 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = [
     TodayScreen(),
-    Container(color: Colors.amber,),
-    Container(color: Colors.deepPurple,),
-    Container(color: Colors.yellow,),
-    Container(color: Colors.blueGrey,),
+    Container(
+      color: Colors.amber,
+    ),
+    Container(
+      color: Colors.deepPurple,
+    ),
+    Container(
+      color: Colors.yellow,
+    ),
+    Container(
+      color: Colors.blueGrey,
+    ),
   ];
 
-  void _onItemTapped(int index){
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(child: _widgetOptions[_selectedIndex],),
+        body: Center(
+          child: _widgetOptions[_selectedIndex],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           items: [
@@ -77,5 +94,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-

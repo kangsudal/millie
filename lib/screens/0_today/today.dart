@@ -48,10 +48,13 @@ class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
         },
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(top: 5.0, right: 8),
-          child: GestureDetector(
-            onTap: () {},
+        GestureDetector(
+          onTap: () {
+            print('clicked');
+            Navigator.pushNamed(context, '/notification');
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5.0, right: 8),
             child: Stack(
               children: [
                 Icon(
