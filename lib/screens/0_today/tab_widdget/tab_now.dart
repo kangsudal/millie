@@ -165,50 +165,10 @@ class _NewWidget3State extends State<NewWidget3> {
                                 height: 230,
                                 child: Stack(
                                   children: [
-                                    Positioned(
-                                      left: -20,
-                                      right: -20,
-                                      bottom: -20,
-                                      top: -20,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: ImageFiltered(
-                                          imageFilter: ImageFilter.blur(
-                                            tileMode: TileMode.decal,
-                                            sigmaY: 40,
-                                            sigmaX: 40,
-                                          ),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                  snapshot
-                                                      .data![index].thumbnail,
-                                                ),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 50,
-                                      right: 50,
-                                      bottom: 0,
-                                      top: 20,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          // border: Border.all(),
-                                          borderRadius: BorderRadius.vertical(
-                                              top: Radius.circular(4)),
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                snapshot.data![index].thumbnail,
-                                              ),
-                                              fit: BoxFit.cover),
-                                        ),
-                                      ),
+                                    BluredBackgroundImgWidget(snapshot:snapshot,index:index),
+                                    BookCoverWidget(
+                                      snapshot: snapshot,
+                                      index: index,
                                     ),
                                   ],
                                 ),
@@ -243,7 +203,8 @@ class _NewWidget3State extends State<NewWidget3> {
                 onTap: () {
                   setState(() {
                     var rng = Random();
-                    startIndex = rng.nextInt(300); //총 검색량 수가 맞지않는것같아 임의로 300까지 랜덤값으로 startIndex를 줌
+                    startIndex = rng.nextInt(
+                        300); //총 검색량 수가 맞지않는것같아 임의로 300까지 랜덤값으로 startIndex를 줌
                     futureBooks = fetchBooks();
                   });
                 },
@@ -274,6 +235,76 @@ class _NewWidget3State extends State<NewWidget3> {
                 ),
               )),
         ],
+      ),
+    );
+  }
+}
+
+class BluredBackgroundImgWidget extends StatelessWidget {
+  final AsyncSnapshot<List<Book>> snapshot;
+  final int index;
+  const BluredBackgroundImgWidget({
+    Key? key, required this.snapshot,required this.index,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: -20,
+      right: -20,
+      bottom: -20,
+      top: -20,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: ImageFiltered(
+          imageFilter: ImageFilter.blur(
+            tileMode: TileMode.decal,
+            sigmaY: 40,
+            sigmaX: 40,
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                  snapshot
+                      .data![index].thumbnail,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BookCoverWidget extends StatelessWidget {
+  final AsyncSnapshot<List<Book>> snapshot;
+  final int index;
+  const BookCoverWidget({
+    required this.snapshot,
+    required this.index,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 50,
+      right: 50,
+      bottom: 0,
+      top: 20,
+      child: Container(
+        decoration: BoxDecoration(
+          // border: Border.all(),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
+          image: DecorationImage(
+              image: NetworkImage(
+                snapshot.data![index].thumbnail,
+              ),
+              fit: BoxFit.cover),
+        ),
       ),
     );
   }
