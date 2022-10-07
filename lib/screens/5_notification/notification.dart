@@ -9,7 +9,7 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   int itemCount = 10;
-  late List<bool> _isVisible = List.generate(itemCount, (index) => true);
+  late List<bool> _isVisible = List.generate(itemCount, (index) => false);
 
   @override
   Widget build(BuildContext context) {
