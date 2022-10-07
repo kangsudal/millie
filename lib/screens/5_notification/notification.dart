@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
+
+  @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
+  int itemCount = 10;
+  late List<bool> _isVisible = List.generate(itemCount, (index) => true);
 
   @override
   Widget build(BuildContext context) {
@@ -19,62 +27,73 @@ class NotificationPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      child: Text(
-                        "N",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      radius: 10,
-                      backgroundColor: Colors.yellow,
-                      foregroundColor: Colors.black,
-                    ),
-                    Text('[업데이트]오디오 플레이어 및 서비스 업데이트 안내'),
-                  ],
-                ),
-                trailing: Icon(Icons.keyboard_arrow_down),
-                subtitle: Text('2022-10-06'),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                child: SelectableText.rich(
-                  TextSpan(
-                    text: '안녕하세요. 독서와 무제한 친해지리, 밀리의 서재입니다.\n',
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isVisible[index] = !_isVisible[index];
+                  });
+                },
+                child: ListTile(
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextSpan(
-                        text: '1. 오디오 플레이어 추가\n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                      CircleAvatar(
+                        child: Text(
+                          "N",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        radius: 10,
+                        backgroundColor: Colors.yellow,
+                        foregroundColor: Colors.black,
                       ),
-                      TextSpan(
-                          text:
-                              '평범하지만 따뜻한 이야기 <어서오세요. 휴남동 서점입니다> 오디오 드라마가 오픈되었는데요. 이에 맞춰 오연서, 이수혁의 목소리를 더욱 편리하게 들어보실 수 있도록 오디오 플레이어가 추가되었습니다.\n'),
-                      WidgetSpan(
-                        child: SizedBox(
-                            height: 220,
-                            width: 150,
-                            child: Image.asset('images/img_audiodrama.jpg',fit: BoxFit.contain,)),
-                      ),
-                      TextSpan(
-                        text: '\n최근 들은 오디오 메뉴를 통해 바로 이용하실 수 있어요.'
-                      ),
+                      Text('[업데이트]오디오 플레이어 및 서비스 업데이트 안내'),
                     ],
                   ),
+                  trailing: Icon(Icons.keyboard_arrow_down),
+                  subtitle: Text('2022-10-06'),
                 ),
-                color: Colors.grey[300],
-                height: 400,
-                width: double.infinity,
+              ),
+              Visibility(
+                visible: _isVisible[index],
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: SelectableText.rich(
+                    TextSpan(
+                      text: '안녕하세요. 독서와 무제한 친해지리, 밀리의 서재입니다.\n',
+                      children: [
+                        TextSpan(
+                          text: '1. 오디오 플레이어 추가\n',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                            text:
+                                '평범하지만 따뜻한 이야기 <어서오세요. 휴남동 서점입니다> 오디오 드라마가 오픈되었는데요. 이에 맞춰 오연서, 이수혁의 목소리를 더욱 편리하게 들어보실 수 있도록 오디오 플레이어가 추가되었습니다.\n'),
+                        WidgetSpan(
+                          child: SizedBox(
+                              height: 220,
+                              width: 150,
+                              child: Image.asset(
+                                'images/img_audiodrama.jpg',
+                                fit: BoxFit.contain,
+                              )),
+                        ),
+                        TextSpan(text: '\n최근 들은 오디오 메뉴를 통해 바로 이용하실 수 있어요.'),
+                      ],
+                    ),
+                  ),
+                  color: Colors.grey[300],
+                  height: 400,
+                  width: double.infinity,
+                ),
               ),
             ],
           );
         },
-        itemCount: 10,
+        itemCount: itemCount,
       ),
     ];
     return DefaultTabController(
