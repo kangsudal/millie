@@ -163,15 +163,18 @@ class _NewWidget3State extends State<NewWidget3> {
                             children: [
                               SizedBox(
                                 height: 230,
-                                child: Stack(
-                                  children: [
-                                    BluredBackgroundImgWidget(
-                                        snapshot: snapshot, index: index),
-                                    BookCoverWidget(
-                                      snapshot: snapshot,
-                                      index: index,
-                                    ),
-                                  ],
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.all(Radius.circular(15),),
+                                  child: Stack(
+                                    children: [
+                                      BluredBackgroundImgWidget(
+                                          snapshot: snapshot, index: index),
+                                      BookCoverWidget(
+                                        snapshot: snapshot,
+                                        index: index,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Text(
@@ -252,32 +255,26 @@ class BluredBackgroundImgWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Positioned(
-        left: -20,
-        right: -20,
-        bottom: -20,
-        top: -20,
-        child: ClipRRect(
-          // borderRadius: BorderRadius.circular(15),
-          child: ImageFiltered(
-            imageFilter: ImageFilter.blur(
-              tileMode: TileMode.decal,
-              sigmaY: 40,
-              sigmaX: 40,
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: snapshot.data![index].thumbnail == ''
-                      ? AssetImage('images/emptybookcover.png') as ImageProvider
-                      : NetworkImage(
-                          snapshot.data![index].thumbnail,
-                        ),
-                  fit: BoxFit.cover,
-                ),
-              ),
+    return Positioned(
+      left: -20,
+      right: -20,
+      bottom: -20,
+      top: -20,
+      child: ImageFiltered(
+        imageFilter: ImageFilter.blur(
+          tileMode: TileMode.decal,
+          sigmaY: 40,
+          sigmaX: 40,
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: snapshot.data![index].thumbnail == ''
+                  ? AssetImage('images/emptybookcover.png') as ImageProvider
+                  : NetworkImage(
+                      snapshot.data![index].thumbnail,
+                    ),
+              fit: BoxFit.cover,
             ),
           ),
         ),
