@@ -10,6 +10,7 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   int itemCount = 10;
   late List<bool> _isVisible = List.generate(itemCount, (index) => false);
+  late List<bool> checked = List.generate(itemCount, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +32,26 @@ class _NotificationPageState extends State<NotificationPage> {
                 onTap: () {
                   setState(() {
                     _isVisible[index] = !_isVisible[index];
+                    checked[index] = true;
                   });
                 },
                 child: ListTile(
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CircleAvatar(
-                        child: Text(
-                          "N",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                      Visibility(
+                        visible: checked[index]==false,
+                        child: CircleAvatar(
+                          child: Text(
+                            "N",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
+                          radius: 10,
+                          backgroundColor: Colors.yellow,
+                          foregroundColor: Colors.black,
                         ),
-                        radius: 10,
-                        backgroundColor: Colors.yellow,
-                        foregroundColor: Colors.black,
                       ),
                       Text('[업데이트]오디오 플레이어 및 서비스 업데이트 안내'),
                     ],
