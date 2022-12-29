@@ -16,7 +16,6 @@ class _TodayScreenState extends State<TodayScreen> {
     List<Widget> _widgetOptions = [
       NowTabBarView(),
       AudioBookTabBarView(),
-      StoryTabBarView(),
     ];
     return DefaultTabController(
       length: 3,
@@ -90,9 +89,6 @@ class TodayAppBar extends StatelessWidget with PreferredSizeWidget {
           ),
           Tab(
             child: Text('오디오북·챗북'),
-          ),
-          Tab(
-            child: Text('스토리'),
           ),
         ],
         indicatorColor: Colors.black,
