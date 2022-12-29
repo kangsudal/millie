@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:millie/screens/0_today/today.dart';
 import 'package:millie/screens/4_management/management.dart';
@@ -22,8 +23,18 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(),
         '/notification': (context) => NotificationPage(),
       },
+      scrollBehavior: MyCustomScrollBehavior(),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }
 
 class MyHomePage extends StatefulWidget {
