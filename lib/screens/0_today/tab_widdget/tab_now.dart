@@ -22,7 +22,7 @@ class NowTabBarView extends StatelessWidget {
           NewWidget(),
           NewWidget2(),
           NewWidget3(),
-          NewWidget4(),
+          // NewWidget4(),
         ],
       ),
     );

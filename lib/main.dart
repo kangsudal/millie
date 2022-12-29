@@ -37,15 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = [
     TodayScreen(),
-    Container(
-      color: Colors.amber,
-    ),
-    Container(
-      color: Colors.deepPurple,
-    ),
-    Container(
-      color: Colors.yellow,
-    ),
     ManagementScreen(),
   ];
 
@@ -68,18 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.today),
               label: '투데이',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined),
-              label: '완독자수',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.manage_search_outlined),
-              label: '검색',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.inventory_2_outlined),
-              label: '내서재',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_circle),
