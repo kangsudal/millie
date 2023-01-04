@@ -6,14 +6,13 @@ class ManagementScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Widget1(),
-          Widget2(),
-          Widget3(),
-        ],
-      ),
+   return Column(
+      children: [
+        Widget1(),
+        Expanded(child: Widget2()),
+        Widget3(),
+      ],
+
     );
   }
 }
@@ -135,7 +134,7 @@ class Widget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
+      // height: 180,
       // decoration: BoxDecoration(color: Colors.blueGrey),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
