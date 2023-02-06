@@ -4,7 +4,7 @@
 
 **데이터**: [Google Books API](https://developers.google.com/books/docs/v1/using?hl=ko)
 
-**프레임워크**: fLUTTER
+**프레임워크**: Flutter
 <br/>
 <br/>
 
