@@ -20,17 +20,21 @@ https://kangsudal.tistory.com/entry/%EB%B0%80%EB%A6%AC%EC%9D%98-%EC%84%9C%EC%9E%
 
 ### 사용 라이브러리와 위젯
 
-**사용 라이브러리**: `carousel_slider`, `http`
+**사용 라이브러리**: `carousel_slider`, `http`, `riverpod`
 
 `http`: Google Books API에서 도서 정보를 받아옴
 
 `carousel_slider`: 스크롤 기능
 
-**사용 위젯**: `BottomNavigationBar`, `TabBar`, `ImageFiltered`, `Visibility`
+`riverpod`: 스크롤할때 offset에 따라 appBar를 보일지 말지 상태 관리
+
+**사용 위젯**: `BottomNavigationBar`, `TabBar`, `ImageFiltered`, `Visibility`, `AnimatedOpacity`
 
 `ImageFiltered`: 책 표지색에 맞게 blur된 배경 생성
 
 `Visibility`: 알림-공지사항에 리스트를 열고 닫는 기능
+
+`AnimatedOpacity`: 스크롤할때 offset에 따라 appBar의 투명도 조절
 <br/>
 <br/>
 
