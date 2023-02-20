@@ -27,9 +27,9 @@ class Widget1 extends StatelessWidget {
       // decoration: BoxDecoration(color: Colors.blueGrey),
       child: Padding(
         padding: EdgeInsets.only(
-          left: leftPadding,
-          right: leftPadding,
-          top: leftPadding,
+          left: symmetricPadding,
+          right: symmetricPadding,
+          top: symmetricPadding,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +141,7 @@ class Widget2 extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.only(
-              left: leftPadding,
+              left: symmetricPadding,
             ),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -175,7 +175,7 @@ class MyTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        left: leftPadding,
+        left: symmetricPadding,
       ),
       child: Align(
         alignment: Alignment.centerLeft,

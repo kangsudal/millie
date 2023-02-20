@@ -4,19 +4,49 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:millie/models/book.dart';
+import 'package:millie/riverpod/listen_provider.dart';
 
-const double leftPadding = 20;
+const double symmetricPadding = 20;
 
-class NowTabBarView extends StatelessWidget {
+class NowTabBarView extends ConsumerStatefulWidget {
   const NowTabBarView({
     Key? key,
   }) : super(key: key);
 
   @override
+  ConsumerState<NowTabBarView> createState() => _NowTabBarViewState();
+}
+
+class _NowTabBarViewState extends ConsumerState<NowTabBarView> {
+  final ScrollController _scrollController = ScrollController();
+  bool showTitle = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 40) {
+        if (showTitle) return; //이미 40 이상이면 true로 내버려둔다.
+        ref.read(showTitleProvider.notifier).update((state) => true);
+      } else {
+        ref.read(showTitleProvider.notifier).update((state) => false);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Column(
         children: [
           NewWidget(),
@@ -64,6 +94,7 @@ class _NewWidget3State extends State<NewWidget3> {
   late Future<List<Book>> futureBooks;
   String keyword = '20대 경제';
   int startIndex = 0;
+
   // int bookLength = 0; //result total books / totalItems 총 검색조회수가 아닌거같음.
   int itemCount = 6; //displayed book
 
@@ -93,7 +124,7 @@ class _NewWidget3State extends State<NewWidget3> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: leftPadding),
+      padding: EdgeInsets.only(left: symmetricPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -164,7 +195,9 @@ class _NewWidget3State extends State<NewWidget3> {
                               SizedBox(
                                 height: 230,
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.all(Radius.circular(15),),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
                                   child: Stack(
                                     children: [
                                       BluredBackgroundImgWidget(
@@ -247,6 +280,7 @@ class _NewWidget3State extends State<NewWidget3> {
 class BluredBackgroundImgWidget extends StatelessWidget {
   final AsyncSnapshot<List<Book>> snapshot;
   final int index;
+
   const BluredBackgroundImgWidget({
     Key? key,
     required this.snapshot,
@@ -286,6 +320,7 @@ class BluredBackgroundImgWidget extends StatelessWidget {
 class BookCoverWidget extends StatelessWidget {
   final AsyncSnapshot<List<Book>> snapshot;
   final int index;
+
   const BookCoverWidget({
     required this.snapshot,
     required this.index,
@@ -384,6 +419,7 @@ class NewWidget extends StatefulWidget {
 
 class _NewWidgetState extends State<NewWidget> {
   int currentPage = 0;
+
   @override
   Widget build(BuildContext context) {
     final dataList = [
@@ -406,125 +442,91 @@ class _NewWidgetState extends State<NewWidget> {
         // 'https://images.unsplash.com/photo-1528825871115-3581a5387919?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80',
       }
     ];
-    return Stack(
-      children: [
-        Container(
-          color: Colors.primaries[currentPage].withOpacity(0.5),
-          height: 230,
-        ),
-        CarouselSlider.builder(
-          options: CarouselOptions(
-              viewportFraction: 1,
-              height: 300.0,
-              autoPlay: true,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  currentPage = index;
-                });
-              }),
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index, int realIndex) {
-            final String title = dataList[index]['title'] ?? 'title';
-            final subTitle = dataList[index]['subTitle'] ?? 'subTitle';
-            final img = dataList[index]['img'] ?? 'images/bear.png';
-            // 'https://images.unsplash.com/photo-1497354861845-d381fb7c91a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
+    return CarouselSlider.builder(
+      options: CarouselOptions(
+          viewportFraction: 1,
+          height: 350.0,
+          autoPlay: true,
+          onPageChanged: (index, reason) {
+            setState(() {
+              currentPage = index;
+            });
+          }),
+      itemCount: 3,
+      itemBuilder: (BuildContext context, int index, int realIndex) {
+        final String title = dataList[index]['title'] ?? 'title';
+        final subTitle = dataList[index]['subTitle'] ?? 'subTitle';
+        final img = dataList[index]['img'] ?? 'images/bear.png';
+        // 'https://images.unsplash.com/photo-1497354861845-d381fb7c91a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80';
 
-            return Stack(
+        return Stack(
+          children: [
+            Container(
+              color: Colors.primaries[currentPage].withOpacity(0.5),
+              height: 270,
+            ),
+            Column(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      height: 300,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: symmetricPadding,right: symmetricPadding,top: 80,),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 30),
                       ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: leftPadding),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      Text(
+                        subTitle,
+                        style: TextStyle(color: Colors.black38, fontSize: 20),
+                      ),
+                      Container(
+                        // margin: EdgeInsets.only(
+                        //   left: 8,
+                        //   bottom: 30,
+                        // ),
+                        padding: EdgeInsets.only(left: 8),
+                        width: 80,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              title,
+                              '${currentPage + 1}/${dataList.length}',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 30),
+                                fontSize: 20,
+                              ),
                             ),
-                            Text(
-                              subTitle,
-                              style: TextStyle(
-                                  color: Colors.black38, fontSize: 20),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(
-                                    left: 8,
-                                    bottom: 30,
-                                  ),
-                                  padding: EdgeInsets.only(left: 8),
-                                  width: 80,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(),
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '${currentPage+1}/${dataList.length}',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      Icon(Icons.navigate_next),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  child: Image.asset(
-                                    img,
-                                    fit: BoxFit.contain,
-                                  ),
-                                  width: 150,
-                                  height: 180,
-                                ),
-                              ],
-                            ),
+                            Icon(Icons.navigate_next),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
-            );
-          },
-        ),
-/*        Positioned(
-          left: 30,
-          bottom: 80,
-          child: Container(
-            margin: EdgeInsets.all(8),
-            width: 60,
-            height: 40,
-            decoration: BoxDecoration(
-              border: Border.all(),
-              borderRadius: BorderRadius.circular(18),
             ),
-            child: Center(
-              child: Text(
-                '$currentPage/${dataList.length}>',
-                style: TextStyle(
-                  fontSize: 20,
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: SizedBox(
+                child: Image.asset(
+                  img,
+                  fit: BoxFit.contain,
                 ),
+                width: 150,
+                height: 180,
               ),
             ),
-          ),
-        ),*/
-      ],
+          ],
+        );
+      },
     );
   }
 }
