@@ -28,7 +28,7 @@ https://kangsudal.tistory.com/entry/%EB%B0%80%EB%A6%AC%EC%9D%98-%EC%84%9C%EC%9E%
 
 `riverpod`: 스크롤할때 offset에 따라 appBar를 보일지 말지 상태 관리
 
-**사용 위젯**: `BottomNavigationBar`, `TabBar`, `ImageFiltered`, `Visibility`, `AnimatedOpacity`
+**사용 위젯**: `BottomNavigationBar`, `DefaultTabController`, `TabBar` & `TabBarView`, `ImageFiltered`, `Visibility`, `AnimatedOpacity`
 
 `ImageFiltered`: 책 표지색에 맞게 blur된 배경 생성
 
